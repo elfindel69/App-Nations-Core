@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.InteropServices.WindowsRuntime;
+
 namespace AppNationsCore
 {
 	public static class NationMenusConsole
@@ -13,11 +15,35 @@ namespace AppNationsCore
 			return newNation;
 		}
 
-		public static void Viewer(Nation viewNation)
+		public static int Viewer(Nation viewNation)
 		{
 			//display selected nation
 			NationWiew view = new NationWiew(viewNation);
 			view.Viewer();
+			//nation's menu
+			Console.WriteLine("Nation's menu:");
+			Console.WriteLine("1. Edit");
+			Console.WriteLine("2. Save");
+			string strChoice = Console.ReadLine();
+			int.TryParse(strChoice, out int choice);
+
+			return choice;
+		}
+
+		public static int ListViewer(Nation[] tabNations)
+		{
+			Console.WriteLine("List of Nations:");
+			for (int i = 0; i < tabNations.Length; i++)
+			{
+				Console.WriteLine(i + ": " + tabNations[i].Name.ToString());
+			}
+			//selection
+			Console.WriteLine("Enter a Nation ID:");
+
+			string strChoice = Console.ReadLine();
+			int.TryParse(strChoice, out int choice);
+
+			return choice;
 		}
 
 		public static Nation Editor(Nation editNation)

@@ -15,14 +15,40 @@ namespace AppNationsCore
 			return newLeader;
 		}
 
-		public static void Viewer(Leader viewLeader)
+		public static int Viewer(Leader viewLeader)
 		{
 
 			//display selected leader
 			LeaderWiew view = new LeaderWiew(viewLeader);
 			view.Viewer();
+
+			//leader's menu
+			Console.WriteLine("Leader's menu:");
+			Console.WriteLine("1. Edit");
+			Console.WriteLine("2. Save");
+			string strChoice = Console.ReadLine();
+			int.TryParse(strChoice, out int choice);
+			return choice;
+			
 		}
 
+		public static int ListViewer(Leader[] tabLeaders)
+		{
+			//display list of leaders
+			Console.WriteLine("List of Leaders:");
+			for (int i = 0; i < tabLeaders.Length; i++)
+			{
+				Console.WriteLine(i + ": " + tabLeaders[i].Name);
+			}
+
+			//selection
+			Console.WriteLine("Enter a Leader ID:");
+
+			string strChoice = Console.ReadLine();
+			int.TryParse(strChoice, out int choice);
+
+			return choice;
+		}
 		public static Leader Editor(Leader editLeader)
 		{
 			LeaderEdit editor = new LeaderEdit(editLeader);

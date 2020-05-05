@@ -27,37 +27,18 @@ namespace AppNationsCore
 			do 
 			{
 				//first menu
-				Console.WriteLine("Welcome to AppNations!");
-				Console.WriteLine("Menu:");
-				Console.WriteLine("1. Load...");
-				Console.WriteLine("2. View...");
-				string strChoice = Console.ReadLine();
-				int.TryParse(strChoice, out int choice);
+				int choice = CommonMenusConsole.FirstMenu();
 
 				//Loader
 				if (choice == 1)
 				{
-					Console.WriteLine("Loading menu: ");
-					Console.WriteLine("1. Nations");
-					Console.WriteLine("2. Leaders");
-					string strViewChoice = Console.ReadLine();
-					int.TryParse(strViewChoice, out int loadChoice);
+					int loadChoice = CommonMenusConsole.LoadMenu();
 
 					//Nations
 					if(loadChoice == 1)
 					{
-						Console.WriteLine("File List: ");
-						for(int i=0; i<tabNatSaved.Length; i++)
-						{
-							Console.WriteLine("file: " + tabNatSaved[i]);
-						}
-
-						//selection
-						Console.WriteLine("Enter a file ID:");
-
-						strChoice = Console.ReadLine();
-						int.TryParse(strChoice, out int natChoice);
-
+					
+						int natChoice = CommonMenusConsole.FileMenu(tabNatSaved);
 						//loader
 						Nation newNation = NationMenusConsole.Loader(tabNatSaved[natChoice]);
 
@@ -67,55 +48,23 @@ namespace AppNationsCore
 					//Leaders
 					if (loadChoice == 1)
 					{
-						Console.WriteLine("File List: ");
-						for (int i = 0; i < tabLeaSaved.Length; i++)
-						{
-							Console.WriteLine("file: " + tabLeaSaved[i]);
-						}
-
-						//selection
-						Console.WriteLine("Enter a file ID:");
-
-						strChoice = Console.ReadLine();
-						int.TryParse(strChoice, out int leaChoice);
+						int leaChoice = CommonMenusConsole.FileMenu(tabNatSaved);
 
 						tabLeaders[leaChoice] = LeaderMenusConsole.Loader(tabLeaSaved[leaChoice]);
-						 
-						
 					}
 				}
 				//Viewer
 				if (choice == 2)
 				{
-					Console.WriteLine("Viewer menu: ");
-					Console.WriteLine("1. Nations");
-					Console.WriteLine("2. Leaders");
-					string strViewChoice = Console.ReadLine();
-					int.TryParse(strViewChoice, out int viewChoice);
+					int viewChoice = CommonMenusConsole.ViewMenu();
 
 					//nations
 					if (viewChoice == 1)
 					{
 						//display list of nations
-						Console.WriteLine("List of Nations:");
-						for (int i = 0; i < tabNations.Length; i++)
-						{
-							Console.WriteLine(i + ": " + tabNations[i].Name.ToString());
-						}
-						//selection
-						Console.WriteLine("Enter a Nation ID:");
-
-						strChoice = Console.ReadLine();
-						int.TryParse(strChoice, out int natChoice);
-
+						int natChoice = NationMenusConsole.ListViewer(tabNations);
 						//selected nation's display
-						NationMenusConsole.Viewer(tabNations[natChoice]);
-						//nation's menu
-						Console.WriteLine("Nation's menu:");
-						Console.WriteLine("1. Edit");
-						Console.WriteLine("2. Save");
-						strChoice = Console.ReadLine();
-						int.TryParse(strChoice, out int menuChoice);
+						int menuChoice = NationMenusConsole.Viewer(tabNations[natChoice]);
 
 						//edit
 						if (menuChoice == 1)
@@ -138,28 +87,11 @@ namespace AppNationsCore
 					//leaders
 					else if (viewChoice == 2)
 					{
-						//display list of leaders
-						Console.WriteLine("List of Leaders:");
-						for (int i = 0; i < tabLeaders.Length; i++)
-						{
-							Console.WriteLine(i + ": " + tabLeaders[i].Name);
-						}
-
-						//selection
-						Console.WriteLine("Enter a Leader ID:");
-
-						strChoice = Console.ReadLine();
-						int.TryParse(strChoice, out int leaChoice);
+						int leaChoice = LeaderMenusConsole.ListViewer(tabLeaders);
 
 						//display selected leader
-						LeaderMenusConsole.Viewer(tabLeaders[leaChoice]);
-						//leader's menu
-						Console.WriteLine("Leader's menu:");
-						Console.WriteLine("1. Edit");
-						Console.WriteLine("2. Save");
-						strChoice = Console.ReadLine();
-						int.TryParse(strChoice, out int menuChoice);
-
+						int menuChoice = LeaderMenusConsole.Viewer(tabLeaders[leaChoice]);
+						
 						//edit
 						if (menuChoice == 1)
 						{
