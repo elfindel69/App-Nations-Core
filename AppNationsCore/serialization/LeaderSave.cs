@@ -29,13 +29,13 @@ namespace AppNationsCore
         //display
         public void Save()
         {
-            Console.WriteLine("saving leader:"+ m_leader.Name);
+            
             XmlSerializer serializer =
              new XmlSerializer(typeof(Leader));
             TextWriter writer = new StreamWriter(m_file);
             serializer.Serialize(writer, m_leader);
             writer.Close();
-            Console.WriteLine("leader saved!");
+            
         }
     }
 }

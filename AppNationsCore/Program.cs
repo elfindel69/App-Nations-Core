@@ -59,13 +59,13 @@ namespace AppNationsCore
 						int.TryParse(strChoice, out int natChoice);
 
 						//loader
-						NationLoad natLoader = new NationLoad(tabNatSaved[natChoice]);
-						Nation newNation = natLoader.Load();
+						Nation newNation = NationMenusConsole.Loader(tabNatSaved[natChoice]);
+
 						tabLeaders[natChoice] = newNation.Leader;
 						tabNations[natChoice] = newNation;
 					}
 					//Leaders
-					if (loadChoice == 2)
+					if (loadChoice == 1)
 					{
 						Console.WriteLine("File List: ");
 						for (int i = 0; i < tabLeaSaved.Length; i++)
@@ -79,9 +79,7 @@ namespace AppNationsCore
 						strChoice = Console.ReadLine();
 						int.TryParse(strChoice, out int leaChoice);
 
-						//loader
-						LeaderLoad leaLoader = new LeaderLoad(tabLeaSaved[leaChoice]);
-						tabLeaders[leaChoice] = leaLoader.Load();
+						tabLeaders[leaChoice] = LeaderMenusConsole.Loader(tabLeaSaved[leaChoice]);
 						 
 						
 					}
@@ -111,9 +109,7 @@ namespace AppNationsCore
 						int.TryParse(strChoice, out int natChoice);
 
 						//selected nation's display
-						NationWiew view = new NationWiew(tabNations[natChoice]);
-						view.Viewer();
-
+						NationMenusConsole.Viewer(tabNations[natChoice]);
 						//nation's menu
 						Console.WriteLine("Nation's menu:");
 						Console.WriteLine("1. Edit");
@@ -124,9 +120,9 @@ namespace AppNationsCore
 						//edit
 						if (menuChoice == 1)
 						{
-							NationEdit editor = new NationEdit(tabNations[natChoice]);
+							
+							Nation newNation = NationMenusConsole.Editor(tabNations[natChoice]);
 
-							Nation newNation = editor.Editor();
 							tabLeaders[natChoice] = newNation.Leader;
 							tabNations[natChoice] = newNation;
 
@@ -134,8 +130,7 @@ namespace AppNationsCore
 						//save
 						if (menuChoice == 2)
 						{
-							NationSave saver = new NationSave(tabNations[natChoice], tabNatSaved[natChoice]);
-							saver.Save();
+							NationMenusConsole.Saver(tabNations[natChoice], tabNatSaved[natChoice]);
 						}
 
 
@@ -157,9 +152,7 @@ namespace AppNationsCore
 						int.TryParse(strChoice, out int leaChoice);
 
 						//display selected leader
-						LeaderWiew view = new LeaderWiew(tabLeaders[leaChoice]);
-						view.Viewer();
-
+						LeaderMenusConsole.Viewer(tabLeaders[leaChoice]);
 						//leader's menu
 						Console.WriteLine("Leader's menu:");
 						Console.WriteLine("1. Edit");
@@ -170,16 +163,13 @@ namespace AppNationsCore
 						//edit
 						if (menuChoice == 1)
 						{
-							LeaderEdit editor = new LeaderEdit(tabLeaders[leaChoice]);
-							tabLeaders[leaChoice] = editor.Editor();
+							tabLeaders[leaChoice] = LeaderMenusConsole.Editor(tabLeaders[leaChoice]);
 						}
 						//save
 						if (menuChoice == 2)
 						{
-							LeaderSave saver = new LeaderSave(tabLeaders[leaChoice], tabLeaSaved[leaChoice]);
-							saver.Save();
+							LeaderMenusConsole.Saver(tabLeaders[leaChoice], tabLeaSaved[leaChoice]);
 						}
-
 					}
 					else
 					{

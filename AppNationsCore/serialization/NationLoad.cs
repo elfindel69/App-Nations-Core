@@ -22,7 +22,6 @@ namespace AppNationsCore
         public Nation Load()
         {
             Nation newNation = new Nation();
-            Console.WriteLine("loading new nation...");
             // Creates an instance of the XmlSerializer class;
             // specifies the type of object to be deserialized.
             XmlSerializer serializer = new XmlSerializer(typeof(Nation));
@@ -33,7 +32,6 @@ namespace AppNationsCore
             // Uses the Deserialize method to restore the object's state
             // with data from the XML document. */
             newNation = (Nation)serializer.Deserialize(fs);
-            Console.WriteLine("Nation "+newNation.Name.ToString()+" loaded!");
             return newNation;
         }
     }

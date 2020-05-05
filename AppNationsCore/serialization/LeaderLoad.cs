@@ -22,7 +22,7 @@ namespace AppNationsCore
         public Leader Load()
         {
             Leader newLeader = new Leader();
-            Console.WriteLine("loading new leader...");
+          
             // Creates an instance of the XmlSerializer class;
             // specifies the type of object to be deserialized.
             XmlSerializer serializer = new XmlSerializer(typeof(Leader));
@@ -33,7 +33,7 @@ namespace AppNationsCore
             // Uses the Deserialize method to restore the object's state
             // with data from the XML document. */
             newLeader = (Leader)serializer.Deserialize(fs);
-            Console.WriteLine("Leader " + newLeader.Name + " loaded!");
+            
             return newLeader;
         }
     }
