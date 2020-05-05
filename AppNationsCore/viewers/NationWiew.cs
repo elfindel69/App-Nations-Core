@@ -23,6 +23,7 @@ namespace AppNationsCore
         //display
        public void Viewer() {
             Console.WriteLine("Nation's view:");
+            Console.WriteLine("ID: " + m_nation.ID);
             Console.WriteLine("Name: "+m_nation.Name.ToString());
             Console.WriteLine("Leader: " + m_nation.Leader.Name);
             Console.WriteLine("Inhabitants: " + m_nation.Inhabs);

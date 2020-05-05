@@ -1,4 +1,6 @@
-﻿namespace AppNationsCore
+﻿using System.Diagnostics;
+
+namespace AppNationsCore
 {
     /**
      *  Class Nation - gestion des nations
@@ -8,6 +10,8 @@
      **/
     public class Nation
     {
+        private static int sID;
+        public int ID { get; }
         //nation's name
         public NatNames Name { get; set; }
         //nation's leader
@@ -19,7 +23,11 @@
         //nb of systems
         public int NbSystems { get; set; }
 
-        public Nation() { }
+        public Nation() 
+        {
+            ID = sID;
+            sID++;
+        }
 
         public Nation(NatNames lname, Leader lLeader, long lInhabs,int lRegions, int lSystems)
         {
@@ -28,6 +36,8 @@
             Inhabs = lInhabs;
             NbRegions = lRegions;
             NbSystems = lSystems;
+            ID = sID;
+            sID++;
         }
 
         //returns the nation's name

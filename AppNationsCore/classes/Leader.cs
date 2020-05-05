@@ -1,4 +1,7 @@
-﻿namespace AppNationsCore
+﻿using System.Data;
+using System.Diagnostics;
+
+namespace AppNationsCore
 {
     /**
      *  Class Leader - gestion des Leaders
@@ -8,6 +11,9 @@
      **/
     public class Leader
     {
+        private static int sID;
+
+        public int ID { get; }
         //fullname
         public string Name { get; set; }
         //date of birth
@@ -21,7 +27,11 @@
         //current localization
         public string Localization { get; set; }
 
-        public Leader() { }
+        public Leader() 
+        { 
+            ID = sID;
+            sID++;
+        }
         //constructor with parameters
         public Leader(string lname, GTCDate lDoB, NatNames lnatName, Species lspecies, GTCDate lDoRule, string lLoc)
         {
@@ -31,6 +41,8 @@
             Species = lspecies;
             DoRule = lDoRule;
             Localization = lLoc;
+            ID = sID;
+            sID++;
         }
 
         //returns the leader's name

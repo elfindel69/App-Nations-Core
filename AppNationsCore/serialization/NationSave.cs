@@ -26,7 +26,7 @@ namespace AppNationsCore
 
         }
 
-        //display
+        //serialize a nation
         public void Save()
         {
             XmlSerializer serializer =

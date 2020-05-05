@@ -24,6 +24,7 @@ namespace AppNationsCore
         public void Viewer()
         {
             Console.WriteLine("Leader's view:");
+            Console.WriteLine("ID: " + m_leader.ID);
             Console.WriteLine("Name: " + m_leader.Name);
             Console.WriteLine("Date of Birth: " + m_leader.DoB.ToString()) ;
             Console.WriteLine("Species: " + m_leader.Species.ToString()) ;

@@ -18,9 +18,16 @@ namespace AppNationsCore
 			ConsoleKeyInfo saisie;
 			//init - loading files
 			List<string> listNatSaved = new List<string>();
+			
+			List<string> listLeaSaved = new List<string>();
+
+			/*ListFilesLoad fLoader1 = new ListFilesLoad("nations.xml");
+			listNatSaved = fLoader1.Load();
+			
+			ListFilesLoad fLoader2 = new ListFilesLoad("leaders.xml");
+			listLeaSaved = fLoader2.Load();*/
 			listNatSaved.Add("nation_0.xml");
 			listNatSaved.Add("nation_1.xml");
-			List<string> listLeaSaved = new List<string>();
 			listLeaSaved.Add("leader_0.xml");
 			listLeaSaved.Add("leader_1.xml");
 			//list of leaders
@@ -99,7 +106,10 @@ namespace AppNationsCore
 						//save
 						if (menuChoice == 2)
 						{
-							NationMenusConsole.Saver(listNations[natChoice], listNatSaved[natChoice]);
+							Nation nat = listNations[natChoice];
+							string file = "nation_" + nat.ID+".xml";
+							listNatSaved.Add(file);
+							NationMenusConsole.Saver(nat, file);
 						}
 
 
@@ -120,7 +130,10 @@ namespace AppNationsCore
 						//save
 						if (menuChoice == 2)
 						{
-							LeaderMenusConsole.Saver(listLeaders[leaChoice], listLeaSaved[leaChoice]);
+							Leader lead = listLeaders[leaChoice];
+							string file = "leader_" + lead.ID + ".xml";
+							listLeaSaved.Add(file);
+							LeaderMenusConsole.Saver(lead, file);
 						}
 					}
 					else
@@ -135,9 +148,19 @@ namespace AppNationsCore
 
 				Console.WriteLine("exit? y/n ");
 					saisie = Console.ReadKey(true);
+
 				
 			} while (saisie.Key != ConsoleKey.Y);
-           
+           if (listLeaSaved.Count > 0)
+			{
+				string file = "leaders.xml";
+				CommonMenusConsole.FilesSaver(listLeaSaved, file);
+			}
+			if (listNatSaved.Count > 0)
+			{
+				string file = "nations.xml";
+				CommonMenusConsole.FilesSaver(listNatSaved, file);
+			}
 		}
     }
 }
