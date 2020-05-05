@@ -22,8 +22,8 @@ namespace AppNationsCore
 				string strChoice = Console.ReadLine();
 				int.TryParse(strChoice, out int choice);
 
-				Leader l1 = new Leader("Mikhail Stensov", new GTCDate(9575, 04, 14, 12, 00, 00), NatNames.Ossarion, Species.Ossars, new GTCDate(9792, 03, 30, 12, 00, 00), "Ossarion, ID, OI");
-				Leader l2 = new Leader("Alma Halama", new GTCDate(9929, 09, 28, 12, 00, 00), NatNames.Keitheas, Species.Ethels, new GTCDate(10193, 02, 20, 12, 00, 00), "Keitheas, FD, KE");
+				Leader l1 = new Leader("Mikhail Stensov", new GTCDate(9575, 04, 14), NatNames.Ossarion, Species.Ossars, new GTCDate(9792, 03, 30), "Ossarion, ID, OI");
+				Leader l2 = new Leader("Alma Halama", new GTCDate(9929, 09, 28), NatNames.Keitheas, Species.Ethels, new GTCDate(10193, 02, 20), "Keitheas, FD, KE");
 				Leader[] tabLeaders = { l1, l2 };
 
 				Nation n1 = new Nation(NatNames.Ossarion, l1, 530000000000L, 6, 50000);
