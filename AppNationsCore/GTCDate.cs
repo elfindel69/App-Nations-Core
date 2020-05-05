@@ -22,6 +22,14 @@
 			Day = lDay;
 		}
 
+		//formatted date constructor
+		public GTCDate(string sDate)
+		{
+			string[] tabDate = sDate.Split("-");
+			Year = int.Parse(tabDate[0]);
+			Month = int.Parse(tabDate[1]);
+			Day = int.Parse(tabDate[2]);
+		}
 		//returns formatted date
 		public override string ToString() {
 				return Year + "-" + CompZero(Month) + "-" + CompZero(Day) + " GTC";
