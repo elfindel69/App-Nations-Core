@@ -6,7 +6,7 @@
 	 * @version: 0.0.1
      * 
      **/
-    internal class Nation
+    public class Nation
     {
         //nation's name
         public NatNames Name { get; set; }

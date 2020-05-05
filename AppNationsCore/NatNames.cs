@@ -6,7 +6,7 @@
 	 * @version: 0.0.1
      * 
      **/
-    enum NatNames
+    public enum NatNames
     {
         Ossarion,
         Krasnodar,

@@ -5,7 +5,7 @@
 	 * @Author : elfindel69
 	 * @version: 0.0.1
 	 **/
-	internal class GTCDate
+	public class GTCDate
 	{
 		public int Year { get; set;}
 

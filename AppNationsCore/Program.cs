@@ -22,95 +22,176 @@ namespace AppNationsCore
 			Nation n2 = new Nation(NatNames.Keitheas, l2, 350000000000L, 5, 30000);
 			Nation[] tabNations = { n1, n2 };
 
-			do
+			string[] tabLeaSaved = { "leader_0.xml", "leader_1.xml" };
+			string[] tabNatSaved = { "nation_0.xml", "nation_1.xml"};
+			do 
 			{
 				//first menu
 				Console.WriteLine("Welcome to AppNations!");
 				Console.WriteLine("Menu:");
-				Console.WriteLine("1. Nations");
-				Console.WriteLine("2. Leaders");
+				Console.WriteLine("1. Load...");
+				Console.WriteLine("2. View...");
 				string strChoice = Console.ReadLine();
 				int.TryParse(strChoice, out int choice);
-				
 
-				//nations
+				//Loader
 				if (choice == 1)
 				{
-					//display list of nations
-					Console.WriteLine("List of Nations:");
-					for(int i = 0; i < tabNations.Length; i++)
+					Console.WriteLine("Loading menu: ");
+					Console.WriteLine("1. Nations");
+					Console.WriteLine("2. Leaders");
+					string strViewChoice = Console.ReadLine();
+					int.TryParse(strViewChoice, out int loadChoice);
+
+					//Nations
+					if(loadChoice == 1)
 					{
-						Console.WriteLine(i+": "+tabNations[i].Name.ToString());
-					}
-					//selection
-					Console.WriteLine("Enter a Nation ID:");
+						Console.WriteLine("File List: ");
+						for(int i=0; i<tabNatSaved.Length; i++)
+						{
+							Console.WriteLine("file: " + tabNatSaved[i]);
+						}
 
-					strChoice = Console.ReadLine();
-					int.TryParse(strChoice, out int natChoice);
+						//selection
+						Console.WriteLine("Enter a file ID:");
 
-					//selected nation's display
-					NationWiew view = new NationWiew(tabNations[natChoice]);
-					view.Viewer();
+						strChoice = Console.ReadLine();
+						int.TryParse(strChoice, out int natChoice);
 
-					//nation's menu
-					Console.WriteLine("Nation's menu:");
-					Console.WriteLine("1. Edit");
-					strChoice = Console.ReadLine();
-					int.TryParse(strChoice, out int menuChoice);
-
-					//edit
-					if (menuChoice == 1)
-					{
-						NationEdit editor = new NationEdit(tabNations[natChoice]);
-
-						 Nation newNation = editor.Editor();
+						//loader
+						NationLoad natLoader = new NationLoad(tabNatSaved[natChoice]);
+						Nation newNation = natLoader.Load();
 						tabLeaders[natChoice] = newNation.Leader;
 						tabNations[natChoice] = newNation;
-
 					}
-					
+					//Leaders
+					if (loadChoice == 2)
+					{
+						Console.WriteLine("File List: ");
+						for (int i = 0; i < tabLeaSaved.Length; i++)
+						{
+							Console.WriteLine("file: " + tabLeaSaved[i]);
+						}
 
+						//selection
+						Console.WriteLine("Enter a file ID:");
+
+						strChoice = Console.ReadLine();
+						int.TryParse(strChoice, out int leaChoice);
+
+						//loader
+						LeaderLoad leaLoader = new LeaderLoad(tabLeaSaved[leaChoice]);
+						tabLeaders[leaChoice] = leaLoader.Load();
+						 
+						
+					}
 				}
-				//leaders
-				else if (choice == 2)
+				//Viewer
+				if (choice == 2)
 				{
-					//display list of leaders
-					Console.WriteLine("List of Leaders:");
-					for (int i = 0; i < tabLeaders.Length; i++)
+					Console.WriteLine("Viewer menu: ");
+					Console.WriteLine("1. Nations");
+					Console.WriteLine("2. Leaders");
+					string strViewChoice = Console.ReadLine();
+					int.TryParse(strViewChoice, out int viewChoice);
+
+					//nations
+					if (viewChoice == 1)
 					{
-						Console.WriteLine(i + ": " + tabLeaders[i].Name);
+						//display list of nations
+						Console.WriteLine("List of Nations:");
+						for (int i = 0; i < tabNations.Length; i++)
+						{
+							Console.WriteLine(i + ": " + tabNations[i].Name.ToString());
+						}
+						//selection
+						Console.WriteLine("Enter a Nation ID:");
+
+						strChoice = Console.ReadLine();
+						int.TryParse(strChoice, out int natChoice);
+
+						//selected nation's display
+						NationWiew view = new NationWiew(tabNations[natChoice]);
+						view.Viewer();
+
+						//nation's menu
+						Console.WriteLine("Nation's menu:");
+						Console.WriteLine("1. Edit");
+						Console.WriteLine("2. Save");
+						strChoice = Console.ReadLine();
+						int.TryParse(strChoice, out int menuChoice);
+
+						//edit
+						if (menuChoice == 1)
+						{
+							NationEdit editor = new NationEdit(tabNations[natChoice]);
+
+							Nation newNation = editor.Editor();
+							tabLeaders[natChoice] = newNation.Leader;
+							tabNations[natChoice] = newNation;
+
+						}
+						//save
+						if (menuChoice == 2)
+						{
+							NationSave saver = new NationSave(tabNations[natChoice], tabNatSaved[natChoice]);
+							saver.Save();
+						}
+
+
 					}
-
-					//selection
-					Console.WriteLine("Enter a Leader ID:");
-
-					strChoice = Console.ReadLine();
-					int.TryParse(strChoice, out int leaChoice);
-
-					//display selected leader
-					LeaderWiew view = new LeaderWiew(tabLeaders[leaChoice]);
-					view.Viewer();
-
-					//leader's menu
-					Console.WriteLine("Nation's menu:");
-					Console.WriteLine("1. Edit");
-					strChoice = Console.ReadLine();
-					int.TryParse(strChoice, out int menuChoice);
-
-					//edit
-					if (menuChoice == 1)
+					//leaders
+					else if (viewChoice == 2)
 					{
-						LeaderEdit editor = new LeaderEdit(tabLeaders[leaChoice]);
-						tabLeaders[leaChoice] = editor.Editor();
+						//display list of leaders
+						Console.WriteLine("List of Leaders:");
+						for (int i = 0; i < tabLeaders.Length; i++)
+						{
+							Console.WriteLine(i + ": " + tabLeaders[i].Name);
+						}
+
+						//selection
+						Console.WriteLine("Enter a Leader ID:");
+
+						strChoice = Console.ReadLine();
+						int.TryParse(strChoice, out int leaChoice);
+
+						//display selected leader
+						LeaderWiew view = new LeaderWiew(tabLeaders[leaChoice]);
+						view.Viewer();
+
+						//leader's menu
+						Console.WriteLine("Leader's menu:");
+						Console.WriteLine("1. Edit");
+						Console.WriteLine("2. Save");
+						strChoice = Console.ReadLine();
+						int.TryParse(strChoice, out int menuChoice);
+
+						//edit
+						if (menuChoice == 1)
+						{
+							LeaderEdit editor = new LeaderEdit(tabLeaders[leaChoice]);
+							tabLeaders[leaChoice] = editor.Editor();
+						}
+						//save
+						if (menuChoice == 2)
+						{
+							LeaderSave saver = new LeaderSave(tabLeaders[leaChoice], tabLeaSaved[leaChoice]);
+							saver.Save();
+						}
+
 					}
-					
+					else
+					{
+						Console.WriteLine("wrong answer :( ");
+					}
 				}
 				else
 				{
 					Console.WriteLine("wrong answer :( ");
 				}
-				
-					Console.WriteLine("exit? y/n ");
+
+				Console.WriteLine("exit? y/n ");
 					saisie = Console.ReadKey(true);
 				
 			} while (saisie.Key != ConsoleKey.Y);

@@ -1,6 +1,6 @@
 ﻿namespace AppNationsCore
 {
-    enum Species
+   public enum Species
     {
        Sedhars,
         Dontars,

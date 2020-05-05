@@ -6,7 +6,7 @@
 	 * @version: 0.0.1
      * 
      **/
-    internal class Leader
+    public class Leader
     {
         //fullname
         public string Name { get; set; }
