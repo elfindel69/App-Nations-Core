@@ -33,7 +33,7 @@ namespace AppNationsCore
             // Uses the Deserialize method to restore the object's state
             // with data from the XML document. */
             newLeader = (Leader)serializer.Deserialize(fs);
-            
+            fs.Close();
             return newLeader;
         }
     }

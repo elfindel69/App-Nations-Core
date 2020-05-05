@@ -21,15 +21,12 @@ namespace AppNationsCore
 			
 			List<string> listLeaSaved = new List<string>();
 
-			/*ListFilesLoad fLoader1 = new ListFilesLoad("nations.xml");
+			ListFilesLoad fLoader1 = new ListFilesLoad("nations.xml");
 			listNatSaved = fLoader1.Load();
 			
 			ListFilesLoad fLoader2 = new ListFilesLoad("leaders.xml");
-			listLeaSaved = fLoader2.Load();*/
-			listNatSaved.Add("nation_0.xml");
-			listNatSaved.Add("nation_1.xml");
-			listLeaSaved.Add("leader_0.xml");
-			listLeaSaved.Add("leader_1.xml");
+			listLeaSaved = fLoader2.Load();
+	
 			//list of leaders
 			List<Leader> listLeaders = new List<Leader>();
 			//list of nations
