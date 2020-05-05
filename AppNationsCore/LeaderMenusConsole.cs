@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace AppNationsCore
@@ -32,13 +33,15 @@ namespace AppNationsCore
 			
 		}
 
-		public static int ListViewer(Leader[] tabLeaders)
+		public static int ListViewer(List<Leader> listLeaders)
 		{
 			//display list of leaders
 			Console.WriteLine("List of Leaders:");
-			for (int i = 0; i < tabLeaders.Length; i++)
+			int i = 0;
+			foreach (Leader lead in listLeaders)
 			{
-				Console.WriteLine(i + ": " + tabLeaders[i].Name);
+				Console.WriteLine(i + ": " + lead.Name);
+				i++;
 			}
 
 			//selection

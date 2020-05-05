@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AppNationsCore
 {
@@ -13,17 +16,34 @@ namespace AppNationsCore
 		static void Main(string[] args)
         {
 			ConsoleKeyInfo saisie;
+			//init - loading files
+			List<string> listNatSaved = new List<string>();
+			listNatSaved.Add("nation_0.xml");
+			listNatSaved.Add("nation_1.xml");
+			List<string> listLeaSaved = new List<string>();
+			listLeaSaved.Add("leader_0.xml");
+			listLeaSaved.Add("leader_1.xml");
 			//list of leaders
-			Leader l1 = new Leader("Mikhail Stensov", new GTCDate(9575, 04, 14), NatNames.Ossarion, Species.Ossars, new GTCDate(9792, 03, 30), "Ossarion, ID, OI");
-			Leader l2 = new Leader("Alma Halama", new GTCDate(9929, 09, 28), NatNames.Keitheas, Species.Ethels, new GTCDate(10193, 02, 20), "Keitheas, FD, KE");
-			Leader[] tabLeaders = { l1, l2 };
+			List<Leader> listLeaders = new List<Leader>();
 			//list of nations
-			Nation n1 = new Nation(NatNames.Ossarion, l1, 530000000000L, 6, 50000);
-			Nation n2 = new Nation(NatNames.Keitheas, l2, 350000000000L, 5, 30000);
-			Nation[] tabNations = { n1, n2 };
+			List<Nation> listNations = new List<Nation>();
 
-			string[] tabLeaSaved = { "leader_0.xml", "leader_1.xml" };
-			string[] tabNatSaved = { "nation_0.xml", "nation_1.xml"};
+
+			//init nations
+			foreach (string file in listNatSaved)
+			{
+				NationLoad loader = new NationLoad(file);
+				Nation n = loader.Load();
+				listNations.Add(n);
+			}
+			//init leaders
+			foreach (string file in listLeaSaved)
+			{
+				LeaderLoad loader = new LeaderLoad(file);
+				Leader lead = loader.Load();
+				listLeaders.Add(lead);
+			}
+
 			do 
 			{
 				//first menu
@@ -38,19 +58,19 @@ namespace AppNationsCore
 					if(loadChoice == 1)
 					{
 					
-						int natChoice = CommonMenusConsole.FileMenu(tabNatSaved);
+						int natChoice = CommonMenusConsole.FileMenu(listNatSaved);
 						//loader
-						Nation newNation = NationMenusConsole.Loader(tabNatSaved[natChoice]);
+						Nation newNation = NationMenusConsole.Loader(listNatSaved[natChoice]);
 
-						tabLeaders[natChoice] = newNation.Leader;
-						tabNations[natChoice] = newNation;
+						listLeaders[natChoice] = newNation.Leader;
+						listNations[natChoice] = newNation;
 					}
 					//Leaders
-					if (loadChoice == 1)
+					if (loadChoice == 2)
 					{
-						int leaChoice = CommonMenusConsole.FileMenu(tabNatSaved);
+						int leaChoice = CommonMenusConsole.FileMenu(listLeaSaved);
 
-						tabLeaders[leaChoice] = LeaderMenusConsole.Loader(tabLeaSaved[leaChoice]);
+						listLeaders[leaChoice] = LeaderMenusConsole.Loader(listLeaSaved[leaChoice]);
 					}
 				}
 				//Viewer
@@ -62,24 +82,24 @@ namespace AppNationsCore
 					if (viewChoice == 1)
 					{
 						//display list of nations
-						int natChoice = NationMenusConsole.ListViewer(tabNations);
+						int natChoice = NationMenusConsole.ListViewer(listNations);
 						//selected nation's display
-						int menuChoice = NationMenusConsole.Viewer(tabNations[natChoice]);
+						int menuChoice = NationMenusConsole.Viewer(listNations[natChoice]);
 
 						//edit
 						if (menuChoice == 1)
 						{
 							
-							Nation newNation = NationMenusConsole.Editor(tabNations[natChoice]);
+							Nation newNation = NationMenusConsole.Editor(listNations[natChoice]);
 
-							tabLeaders[natChoice] = newNation.Leader;
-							tabNations[natChoice] = newNation;
+							listLeaders[natChoice] = newNation.Leader;
+							listNations[natChoice] = newNation;
 
 						}
 						//save
 						if (menuChoice == 2)
 						{
-							NationMenusConsole.Saver(tabNations[natChoice], tabNatSaved[natChoice]);
+							NationMenusConsole.Saver(listNations[natChoice], listNatSaved[natChoice]);
 						}
 
 
@@ -87,20 +107,20 @@ namespace AppNationsCore
 					//leaders
 					else if (viewChoice == 2)
 					{
-						int leaChoice = LeaderMenusConsole.ListViewer(tabLeaders);
+						int leaChoice = LeaderMenusConsole.ListViewer(listLeaders);
 
 						//display selected leader
-						int menuChoice = LeaderMenusConsole.Viewer(tabLeaders[leaChoice]);
+						int menuChoice = LeaderMenusConsole.Viewer(listLeaders[leaChoice]);
 						
 						//edit
 						if (menuChoice == 1)
 						{
-							tabLeaders[leaChoice] = LeaderMenusConsole.Editor(tabLeaders[leaChoice]);
+							listLeaders[leaChoice] = LeaderMenusConsole.Editor(listLeaders[leaChoice]);
 						}
 						//save
 						if (menuChoice == 2)
 						{
-							LeaderMenusConsole.Saver(tabLeaders[leaChoice], tabLeaSaved[leaChoice]);
+							LeaderMenusConsole.Saver(listLeaders[leaChoice], listLeaSaved[leaChoice]);
 						}
 					}
 					else

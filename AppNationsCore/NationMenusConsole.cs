@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace AppNationsCore
@@ -30,12 +31,14 @@ namespace AppNationsCore
 			return choice;
 		}
 
-		public static int ListViewer(Nation[] tabNations)
+		public static int ListViewer(List<Nation> listNations)
 		{
 			Console.WriteLine("List of Nations:");
-			for (int i = 0; i < tabNations.Length; i++)
-			{
-				Console.WriteLine(i + ": " + tabNations[i].Name.ToString());
+			int i = 0;
+			foreach (Nation nat in listNations)
+			{ 
+				Console.WriteLine(i + ": " + nat.Name.ToString());
+				i++;
 			}
 			//selection
 			Console.WriteLine("Enter a Nation ID:");

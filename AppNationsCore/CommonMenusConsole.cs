@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace AppNationsCore
 {
 	public static class CommonMenusConsole
@@ -24,12 +26,14 @@ namespace AppNationsCore
 			return choice;
 		}
 
-		public static int FileMenu(string[] tabFiles)
+		public static int FileMenu(List<string> listFiles)
 		{
 			Console.WriteLine("File List: ");
-			for (int i = 0; i < tabFiles.Length; i++)
+			int i = 0;
+			foreach (string file in listFiles)
 			{
-				Console.WriteLine("file: " + tabFiles[i]);
+				Console.WriteLine("file: " +i+" "+ file);
+				i++;
 			}
 
 			//selection
