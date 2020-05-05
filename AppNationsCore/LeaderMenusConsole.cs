@@ -33,6 +33,27 @@ namespace AppNationsCore
 			
 		}
 
+		public static Leader NewLeader()
+		{
+			
+			Leader newLeader = new Leader();
+			LeaderEdit editor = new LeaderEdit(newLeader);
+			newLeader = editor.Editor();
+
+			return newLeader;
+		}
+
+		public static int NewMenu()
+		{
+
+			Console.WriteLine("Leader's menu:");
+			Console.WriteLine("1. Save");
+			string strChoice = Console.ReadLine();
+			int.TryParse(strChoice, out int choice);
+
+			return choice;
+		}
+
 		public static int ListViewer(List<Leader> listLeaders)
 		{
 			//display list of leaders

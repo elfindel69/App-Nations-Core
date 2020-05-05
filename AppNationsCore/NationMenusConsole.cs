@@ -57,6 +57,28 @@ namespace AppNationsCore
 			return editNation;
 		}
 
+		public static Nation NewNation()
+		{
+			Nation newNation = new Nation();
+			newNation.Leader = new Leader();
+			NationEdit editor = new NationEdit(newNation);
+			newNation = editor.Editor();
+
+			return newNation;
+		}
+
+		public static int NewMenu()
+		{
+			
+			Console.WriteLine("Nation's menu:");
+			Console.WriteLine("1. Save");
+			string strChoice = Console.ReadLine();
+			int.TryParse(strChoice, out int choice);
+
+			return choice;
+		}
+
+
 		public static void Saver(Nation saveNation, string file)
 		{
 			Console.WriteLine("saving nation:" + saveNation.Name.ToString());

@@ -11,6 +11,7 @@ namespace AppNationsCore
 			Console.WriteLine("Menu:");
 			Console.WriteLine("1. Load...");
 			Console.WriteLine("2. View...");
+			Console.WriteLine("3. New...");
 			string strChoice = Console.ReadLine();
 			int.TryParse(strChoice, out int choice);
 			return choice;
@@ -25,6 +26,16 @@ namespace AppNationsCore
 			int.TryParse(strChoice, out int choice);
 			return choice;
 		}
+		public static int NewMenu()
+		{
+			Console.WriteLine("New item menu: ");
+			Console.WriteLine("1. Nations");
+			Console.WriteLine("2. Leaders");
+			string strChoice = Console.ReadLine();
+			int.TryParse(strChoice, out int choice);
+			return choice;
+		}
+
 
 		public static int FileMenu(List<string> listFiles)
 		{
