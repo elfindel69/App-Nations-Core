@@ -2,6 +2,7 @@
 using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace AppNationsCore
@@ -105,8 +106,27 @@ namespace AppNationsCore
 						if (menuChoice == 2)
 						{
 							Nation nat = listNations[natChoice];
-							string file = "nation_" + nat.ID + ".xml";
-							listNatSaved.Add(file);
+							string file = null;
+							int i = 0;
+							bool bNewNation = true;
+							//search for Nation's ID
+							foreach (string f in listNatSaved)
+							{
+								if (f.Contains(nat.ID.ToString()))
+								{
+									file = listNatSaved[i];
+									bNewNation = false;
+									break;
+								}
+								i++;
+							}
+							//new ID
+							if (bNewNation)
+							{
+								file = "nation_" + nat.ID + ".xml";
+								listLeaSaved.Add(file);
+							}
+
 							NationMenusConsole.Saver(nat, file);
 						}
 
@@ -129,8 +149,27 @@ namespace AppNationsCore
 						if (menuChoice == 2)
 						{
 							Leader lead = listLeaders[leaChoice];
-							string file = "leader_" + lead.ID + ".xml";
-							listLeaSaved.Add(file);
+							string file = null;
+							int i = 0;
+							bool bNewLeader = true;
+							//search for Leader's ID
+							foreach (string f in listLeaSaved)
+							{
+								if (f.Contains(lead.ID.ToString()))
+								{
+									file = listLeaSaved[i];
+									bNewLeader = false;
+									break;
+								}
+								i++;
+							}
+							//new ID
+							if (bNewLeader)
+							{
+								file = "leader_" + lead.ID + ".xml";
+								listLeaSaved.Add(file);
+							}
+							
 							LeaderMenusConsole.Saver(lead, file);
 						}
 					}
@@ -139,15 +178,18 @@ namespace AppNationsCore
 						Console.WriteLine("wrong answer :( ");
 					}
 				}
+				//creation 
 				else if (choice == 3)
 				{
 					int newChoice = CommonMenusConsole.NewMenu();
+					//nation
 					if (newChoice == 1)
 					{
 						Nation newNation = NationMenusConsole.NewNation();
 
 						bool newLeader = true;
 						int i = 0;
+						//recherche leader
 						foreach( Leader lead in listLeaders)
 						{
 							if (lead.Equals(newNation.Leader))
@@ -160,6 +202,7 @@ namespace AppNationsCore
 							}
 							i++;
 						}
+						//ajout nouveau leader
 						if (newLeader)
 						{
 							listLeaders.Add(newNation.Leader);
@@ -169,6 +212,7 @@ namespace AppNationsCore
 
 						bool bNewNation = true;
 						int j = 0;
+						//recherche nations
 						foreach (Nation nat in listNations)
 						{
 							if (nat.Equals(newNation))
@@ -180,12 +224,14 @@ namespace AppNationsCore
 								break;
 							}
 						}
+						//nouvelle nation
 						if (bNewNation)
 						{
 							listNations.Add(newNation);
 							string file = "nation_" + newNation.ID + ".xml";
 							listNatSaved.Add(file);
 						}
+						//sauvegarde
 						int saveChoice = NationMenusConsole.NewMenu();
 						if (saveChoice == 1)
 						{
@@ -198,12 +244,14 @@ namespace AppNationsCore
 						}
 
 					}
+					//leaders
 					else if (newChoice == 2)
 					{
 						Leader newLeader = LeaderMenusConsole.NewLeader();
 
 						bool bnewLeader = true;
 						int i = 0;
+						//recherche leaders
 						foreach (Leader lead in listLeaders)
 						{
 							if (lead.Equals(newLeader))
@@ -216,13 +264,14 @@ namespace AppNationsCore
 							}
 							i++;
 						}
+						//nouveau leader
 						if (bnewLeader)
 						{
 							listLeaders.Add(newLeader);
 							string file = "leader_" + newLeader.ID + ".xml";
 							listLeaSaved.Add(file);
 						}
-						
+						//sauvegarde
 						int saveChoice = LeaderMenusConsole.NewMenu();
 						if (saveChoice == 1)
 						{
