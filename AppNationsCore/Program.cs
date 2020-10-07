@@ -1,27 +1,24 @@
-﻿using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace AppNationsCore
-{
-    class Program
+{       
+	/**
+	* Class Program - main display
+	* @Author : elfindel69
+	* @version: 0.0.1
+	* 
+	**/
+	class Program
     {
-		/**
-		* Class Program - main display
-		* @Author : elfindel69
-		* @version: 0.0.1
-		* 
-		**/
+		
 		static void Main(string[] args)
         {
 			ConsoleKeyInfo saisie;
 			//init - loading files
-			List<string> listNatSaved = new List<string>();
+			List<string> listNatSaved;
 			
-			List<string> listLeaSaved = new List<string>();
+			List<string> listLeaSaved;
 
 			ListFilesLoad fLoader1 = new ListFilesLoad("nations.xml");
 			listNatSaved = fLoader1.Load();
